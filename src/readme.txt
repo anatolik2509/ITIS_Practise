@@ -1,6 +1,6 @@
 4.2)
-    MyCollection - неизменяемая коллекция
-    MyNewCollection - изменяемая коллекция
+    collections/MyCollection - неизменяемая коллекция
+    collections/MyNewCollection - изменяемая коллекция
 
 5.1)
     Реализовано в MyCollection MyNewCollection
