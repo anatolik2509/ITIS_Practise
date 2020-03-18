@@ -6,6 +6,12 @@ import data_structures.EndlessArrayReverseIterator;
 
 import java.util.*;
 
+/**
+ * My navigable set
+ * @author Anatoly Antonov
+ * @version 1.0
+ * @param <T> Type of contains element
+ */
 public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T> {
 
     private EndlessArray<T> array = new EndlessArray();
@@ -16,6 +22,11 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
 
     private int direct;
 
+    /**
+     * <p>Constructor with comparator and num, that define direction</p>
+     * @param comparator Comparator, that compare elements
+     * @param direct 1, with direct order, -1 with reverse order
+     */
     public MyNavigableSet(Comparator<? super T> comparator, int direct){
         this.array = new EndlessArray<T>();
         size = 0;
@@ -23,16 +34,27 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
         this.comparator = comparator;
     }
 
+    /**
+     * @return iterator
+     */
     @Override
     public Iterator<T> iterator() {
         return new EndlessArrayIterator<T>(array);
     }
 
+    /**
+     * @return Amount of elements
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * Returns the greatest element less then given element or null if there no such file
+     * @param t Element of set
+     * @return Element standing behind t in order
+     */
     @Override
     public T lower(T t) {
         int index = array.indexOf(t);
@@ -40,6 +62,11 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
         return array.get(index - 1);
     }
 
+    /**
+     * Returns the greatest element less then or equal to given element
+     * @param t given element
+     * @return result
+     */
     @Override
     public T floor(T t) {
         T r = null;
@@ -55,6 +82,11 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
         return r;
     }
 
+    /**
+     * Returns the least element greater then or equal to given element
+     * @param t given element
+     * @return result
+     */
     @Override
     public T ceiling(T t) {
         T r = null;
