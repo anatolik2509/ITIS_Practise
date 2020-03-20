@@ -13,3 +13,18 @@
 
 7.5)
     streams/StreamExample
+
+7.6)
+    streams/StringCounter
+
+7.7)
+    streams/KeyConcatenation
+
+7.8)
+    streams/StringLengths
+
+8.3)
+    streams/NumAndCharPrinter
+
+8.4)
+    streams/NumAndCharReader
