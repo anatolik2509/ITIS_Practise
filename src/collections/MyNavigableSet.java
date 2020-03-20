@@ -51,7 +51,7 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
     }
 
     /**
-     * Returns the greatest element less then given element or null if there no such file
+     * <p>Returns the greatest element less then given element or null if there no such file</p>
      * @param t Element of set
      * @return Element standing behind t in order
      */
@@ -63,7 +63,7 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
     }
 
     /**
-     * Returns the greatest element less then or equal to given element
+     * <p>Returns the greatest element less then or equal to given element</p>
      * @param t given element
      * @return result
      */
@@ -83,7 +83,7 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
     }
 
     /**
-     * Returns the least element greater then or equal to given element
+     * <p>Returns the least element greater then or equal to given element</p>
      * @param t given element
      * @return result
      */
@@ -102,6 +102,11 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
         return r;
     }
 
+    /**
+     * <p>Returns the least element greater then given element</p>
+     * @param t given element
+     * @return result
+     */
     @Override
     public T higher(T t) {
         int index = array.indexOf(t);
@@ -109,6 +114,10 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
         return array.get(index + 1);
     }
 
+    /**
+     * <p>Removes and returns least element</p>
+     * @return least element
+     */
     @Override
     public T pollFirst() {
         if(size == 0) return null;
@@ -118,6 +127,10 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
         return r;
     }
 
+    /**
+     * <p>Removes and returns greatest element</p>
+     * @return greatest element
+     */
     @Override
     public T pollLast() {
         if(size == 0) return null;
@@ -127,6 +140,10 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
         return r;
     }
 
+    /**
+     * <p>Return set with reverse direction</p>
+     * @return new set
+     */
     @Override
     public NavigableSet<T> descendingSet() {
         EndlessArray<T> n = new EndlessArray<>();
@@ -139,11 +156,23 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
         return reverseSet;
     }
 
+    /**
+     * <p>Return iterator with reverse direction</p>
+     * @return descending iterator
+     */
     @Override
     public Iterator<T> descendingIterator() {
         return new EndlessArrayReverseIterator<>(array);
     }
 
+    /**
+     * <p>returns part of set</p>
+     * @param fromElement Start element
+     * @param fromInclusive Include start element
+     * @param toElement Finish element
+     * @param toInclusive Include finish element
+     * @return new set
+     */
     @Override
     public NavigableSet<T> subSet(T fromElement, boolean fromInclusive, T toElement, boolean toInclusive) {
         EndlessArray<T> n = new EndlessArray<>();
@@ -156,46 +185,91 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
         return set;
     }
 
+    /**
+     * <p>Returns subset with start in first element</p>
+     * @param toElement Finish element
+     * @param inclusive Include finish element
+     * @return new set
+     */
     @Override
     public NavigableSet<T> headSet(T toElement, boolean inclusive) {
         return subSet(first(), true, toElement, inclusive);
     }
 
+    /**
+     * <p>Returns subset with finish in last element</p>
+     * @param fromElement Start element
+     * @param inclusive Include start element
+     * @return new set
+     */
     @Override
     public NavigableSet<T> tailSet(T fromElement, boolean inclusive) {
         return subSet(fromElement, inclusive, last(), true);
     }
 
+    /**
+     * <p>Subset with included start element and excluded finish element</p>
+     * @param fromElement Start element
+     * @param toElement Finish element
+     * @return new set
+     */
     @Override
     public SortedSet<T> subSet(T fromElement, T toElement) {
         return subSet(fromElement, true, toElement, false);
     }
 
+    /**
+     * <p>Head set with excluded finish element</p>
+     * @param toElement Finish element
+     * @return new set
+     */
     @Override
     public SortedSet<T> headSet(T toElement) {
         return headSet(toElement, false);
     }
 
+    /**
+     * <p>Tail set with included start element</p>
+     * @param fromElement Start element
+     * @return new set
+     */
     @Override
     public SortedSet<T> tailSet(T fromElement) {
         return tailSet(fromElement, true);
     }
 
+    /**
+     * <p>Returns comparator</p>
+     * @return comparator
+     */
     @Override
     public Comparator<? super T> comparator() {
         return comparator;
     }
 
+    /**
+     * <p>Returns least element</p>
+     * @return element
+     */
     @Override
     public T first() {
         return array.get(0);
     }
 
+    /**
+     * <p>Returns greatest element</p>
+     * @return element
+     */
     @Override
     public T last() {
         return array.get(size - 1);
     }
 
+    /**
+     * <p>Add element to set</p>
+     * @param t Element to add
+     * @return Is element added
+     */
     @Override
     public boolean add(T t) {
         for(int i = 0; i < size; i++){
@@ -211,6 +285,11 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
         return true;
     }
 
+    /**
+     * <p>Removes element</p>
+     * @param o element to remove
+     * @return has element removed
+     */
     @Override
     public boolean remove(Object o) {
         T r = null;
@@ -229,6 +308,11 @@ public class MyNavigableSet<T> extends AbstractSet<T> implements NavigableSet<T>
         return true;
     }
 
+    /**
+     * <p>Is element contains in this set</p>
+     * @param o Element
+     * @return Boolean
+     */
     @Override
     public boolean contains(Object o) {
         T r = null;

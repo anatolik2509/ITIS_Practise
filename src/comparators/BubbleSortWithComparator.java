@@ -17,4 +17,8 @@ public class BubbleSortWithComparator {
             }
         }
     }
+
+    public static void main(String[] args) {
+
+    }
 }
