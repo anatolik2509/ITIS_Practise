@@ -11,11 +11,11 @@ public class StudentDataOutputStream extends DataOutputStream {
     }
 
     public void writeStudent(Student s) throws IOException {
-        writeChars(s.getName());
-        writeChars(s.getGender().name());
-        write(s.getBirthDay());
-        write(s.getBirthMonth());
+        writeUTF(s.getName());
+        writeUTF(s.getGender().name());
+        writeByte(s.getBirthDay());
+        writeByte(s.getBirthMonth());
         writeShort(s.getBirthYear());
-        writeChars(s.getGroup());
+        writeUTF(s.getGroup());
     }
 }
