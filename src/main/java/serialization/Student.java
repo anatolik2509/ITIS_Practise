@@ -14,6 +14,8 @@ public class Student implements Serializable {
     private short birthYear;
     private String group;
 
+    public Student(){}
+
     public Student(String name, Gender gender, byte birthDay, byte birthMonth, short birthYear, String group) {
         this.name = name;
         this.gender = gender;
@@ -49,6 +51,30 @@ public class Student implements Serializable {
 
     public String getGroup() {
         return group;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public void setBirthDay(byte birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public void setBirthMonth(byte birthMonth) {
+        this.birthMonth = birthMonth;
+    }
+
+    public void setBirthYear(short birthYear) {
+        this.birthYear = birthYear;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     @Override

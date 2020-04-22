@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -42,12 +43,15 @@ public class StudentSerialization {
         try(FileInputStream in = new FileInputStream(new File(path))){
             int b;
             while ((b = in.read()) != -1){
-                char[] name = new char[b];
-                for(int i = 0; i < b; i++){
-                    name[i] |= in.read() << 8;
-                    name[i] |= in.read();
+                byte[] name = new byte[b * 2];
+                for(int i = 0; i < b * 2; i++){
+                    name[i] = (byte)in.read();
                 }
-                String studentName = new String(name);
+                String studentName = "";
+                ByteBuffer buffer = ByteBuffer.wrap(name);
+                while (buffer.hasRemaining()){
+                    studentName += buffer.getChar();
+                }
                 Student.Gender gender = in.read() == 0 ? Student.Gender.MALE : Student.Gender.FEMALE;
                 byte birthDay = (byte)in.read();
                 byte birthMonth = (byte)in.read();
