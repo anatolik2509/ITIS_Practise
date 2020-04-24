@@ -5,15 +5,14 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.nodes.Tag;
 import serialization.Student;
 
+import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Pattern;
 
 public class Test {
-    public static void main(String[] args) throws NoSuchMethodException {
-        Yaml yaml = new Yaml(new Constructor(Student.class));
-        Student s = new Student("aa", Student.Gender.MALE, 1, 1, 1, "11-903");
-        PrintWriter wr = new PrintWriter(System.out);
-        yaml.addTypeDescription(new TypeDescription(Student.class));
-        yaml.dump(s, wr);
-        System.out.println(yaml.dumpAs(s, Tag.MAP, null));
+    public static void main(String[] args) throws NoSuchMethodException, IOException {
+        Runtime.getRuntime().exec("cmd /c start notepad.exe");
     }
 }
