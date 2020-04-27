@@ -21,10 +21,6 @@ public class StudentYamlOutputStream extends OutputStream {
         om.writeValue((DataOutput) out, student);
     }
 
-    public static OutputStream nullOutputStream() {
-        return OutputStream.nullOutputStream();
-    }
-
     @Override
     public void write(int i) throws IOException {
         out.write(i);

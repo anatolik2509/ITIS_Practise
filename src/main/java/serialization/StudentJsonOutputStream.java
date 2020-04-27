@@ -24,10 +24,6 @@ public class StudentJsonOutputStream extends OutputStream {
         }
     }
 
-    public static OutputStream nullOutputStream() {
-        return OutputStream.nullOutputStream();
-    }
-
     @Override
     public void write(int i) throws IOException {
         outputStream.write(i);

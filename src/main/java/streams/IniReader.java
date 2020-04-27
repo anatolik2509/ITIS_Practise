@@ -37,28 +37,9 @@ public class IniReader extends InputStream {
         return inputStream.read();
     }
 
-    public static InputStream nullInputStream() {
-        return InputStream.nullInputStream();
-    }
-
     @Override
     public int read(byte[] b, int off, int len) throws IOException {
         return inputStream.read(b, off, len);
-    }
-
-    @Override
-    public byte[] readAllBytes() throws IOException {
-        return inputStream.readAllBytes();
-    }
-
-    @Override
-    public byte[] readNBytes(int len) throws IOException {
-        return inputStream.readNBytes(len);
-    }
-
-    @Override
-    public int readNBytes(byte[] b, int off, int len) throws IOException {
-        return inputStream.readNBytes(b, off, len);
     }
 
     @Override
@@ -89,11 +70,6 @@ public class IniReader extends InputStream {
     @Override
     public boolean markSupported() {
         return inputStream.markSupported();
-    }
-
-    @Override
-    public long transferTo(OutputStream out) throws IOException {
-        return inputStream.transferTo(out);
     }
 
     private class Pair<K, V> implements Map.Entry{

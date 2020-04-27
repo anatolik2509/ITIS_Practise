@@ -89,7 +89,4 @@ public class IniWriter extends OutputStream {
         outputStream.close();
     }
 
-    public static OutputStream nullOutputStream() {
-        return OutputStream.nullOutputStream();
-    }
 }

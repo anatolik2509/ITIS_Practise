@@ -31,10 +31,6 @@ public class StudentJsonInputStream extends InputStream {
         return list;
     }
 
-    public static InputStream nullInputStream() {
-        return InputStream.nullInputStream();
-    }
-
     @Override
     public int read() throws IOException {
         return inputStream.read();
@@ -48,21 +44,6 @@ public class StudentJsonInputStream extends InputStream {
     @Override
     public int read(byte[] b, int off, int len) throws IOException {
         return inputStream.read(b, off, len);
-    }
-
-    @Override
-    public byte[] readAllBytes() throws IOException {
-        return inputStream.readAllBytes();
-    }
-
-    @Override
-    public byte[] readNBytes(int len) throws IOException {
-        return inputStream.readNBytes(len);
-    }
-
-    @Override
-    public int readNBytes(byte[] b, int off, int len) throws IOException {
-        return inputStream.readNBytes(b, off, len);
     }
 
     @Override
@@ -95,8 +76,4 @@ public class StudentJsonInputStream extends InputStream {
         return inputStream.markSupported();
     }
 
-    @Override
-    public long transferTo(OutputStream out) throws IOException {
-        return inputStream.transferTo(out);
-    }
 }

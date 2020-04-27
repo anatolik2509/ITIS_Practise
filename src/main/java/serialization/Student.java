@@ -1,6 +1,7 @@
 package serialization;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Student implements Serializable {
     private String name;
@@ -87,5 +88,23 @@ public class Student implements Serializable {
                 ", birthYear=" + birthYear +
                 ", group='" + group + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return birthDay == student.birthDay &&
+                birthMonth == student.birthMonth &&
+                birthYear == student.birthYear &&
+                Objects.equals(name, student.name) &&
+                gender == student.gender &&
+                Objects.equals(group, student.group);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, gender, birthDay, birthMonth, birthYear, group);
     }
 }

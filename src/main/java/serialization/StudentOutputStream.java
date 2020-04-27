@@ -31,10 +31,6 @@ public class StudentOutputStream extends OutputStream {
         out.flush();
     }
 
-    public static OutputStream nullOutputStream() {
-        return OutputStream.nullOutputStream();
-    }
-
     @Override
     public void write(int i) throws IOException {
         out.write(i);

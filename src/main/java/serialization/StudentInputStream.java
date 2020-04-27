@@ -30,10 +30,6 @@ public class StudentInputStream extends InputStream {
         return new Student(studentName, gender, birthDay, birthMonth, birthYear, studentGroup);
     }
 
-    public static InputStream nullInputStream() {
-        return InputStream.nullInputStream();
-    }
-
     @Override
     public int read() throws IOException {
         return in.read();
@@ -47,21 +43,6 @@ public class StudentInputStream extends InputStream {
     @Override
     public int read(byte[] b, int off, int len) throws IOException {
         return in.read(b, off, len);
-    }
-
-    @Override
-    public byte[] readAllBytes() throws IOException {
-        return in.readAllBytes();
-    }
-
-    @Override
-    public byte[] readNBytes(int len) throws IOException {
-        return in.readNBytes(len);
-    }
-
-    @Override
-    public int readNBytes(byte[] b, int off, int len) throws IOException {
-        return in.readNBytes(b, off, len);
     }
 
     @Override
@@ -94,8 +75,4 @@ public class StudentInputStream extends InputStream {
         return in.markSupported();
     }
 
-    @Override
-    public long transferTo(OutputStream out) throws IOException {
-        return in.transferTo(out);
-    }
 }
