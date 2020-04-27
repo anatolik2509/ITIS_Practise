@@ -10,9 +10,8 @@ public class DomainFinder {
         String in = sc.nextLine();
         Matcher m = Pattern.compile("(\\w+)(\\.(\\w+))+").matcher(in);
         while(m.find()){
-            for(int i = 0; i < m.groupCount(); i++) {
-                System.out.println(m.group(i));
-            }
+
+            System.out.println(m.group(0));
         }
     }
 }
