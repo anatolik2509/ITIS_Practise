@@ -54,4 +54,4 @@
     serialization/StudentYamlInput(Output)Stream
 
 15.1,2)
-    files/FileManager
+    files/...

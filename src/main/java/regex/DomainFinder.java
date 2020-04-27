@@ -10,7 +10,6 @@ public class DomainFinder {
         String in = sc.nextLine();
         Matcher m = Pattern.compile("(\\w+)(\\.(\\w+))+").matcher(in);
         while(m.find()){
-
             System.out.println(m.group(0));
         }
     }
