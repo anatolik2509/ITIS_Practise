@@ -11,6 +11,11 @@ import java.util.regex.Pattern;
 
 public class FileManager {
 
+    private FileSystem fileSystem;
+    private File currentFile;
+    private File bufferFile;
+    private boolean cut;
+
     public static final Pattern OPEN_REG_EX = Pattern.compile("^open ([1-9][0-9]*)");
     public static final Pattern INFO_REG_EX = Pattern.compile("^info ([1-9][0-9]*)");
     public static final Pattern CREATE_REG_EX = Pattern.compile("^create (\\w+)");
@@ -22,13 +27,13 @@ public class FileManager {
     public static final Pattern PASTE_REG_EX = Pattern.compile("^paste");
     public static final Pattern EXIT_REG_EX = Pattern.compile("^exit");
 
-    public static void main(String[] args) throws IOException {
+    public void init() throws IOException {
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
-        FileSystem fileSystem = FileSystems.getDefault();
-        File currentFile = new File("C:/");
-        File bufferFile = null;
-        boolean cut = false;
+        fileSystem = FileSystems.getDefault();
+        currentFile = new File("C:/");
+        bufferFile = null;
+        cut = false;
         String command;
         while(!exit){
             int count = 1;
@@ -45,16 +50,22 @@ public class FileManager {
             System.out.println();
             Matcher matcher = OPEN_REG_EX.matcher(command);
             if(matcher.matches()){
-                int num = Integer.parseInt(matcher.group(1)) - 1;
-                if(num >= files.length || files[num] == null){
-                    System.out.println("No such file!");
-                    continue;
+                File f;
+                if((f = new File(matcher.group(1))) != null){
+                    currentFile = f;
                 }
-                if(!files[num].isDirectory()){
-                    System.out.println("It is not directory!");
-                    continue;
+                else {
+                    int num = Integer.parseInt(matcher.group(1)) - 1;
+                    if (num >= files.length || files[num] == null) {
+                        System.out.println("No such file!");
+                        continue;
+                    }
+                    if (!files[num].isDirectory()) {
+                        System.out.println("It is not directory!");
+                        continue;
+                    }
+                    currentFile = files[num];
                 }
-                currentFile = files[num];
                 continue;
             }
             matcher.usePattern(INFO_REG_EX);
@@ -166,5 +177,41 @@ public class FileManager {
             System.out.println("Unknown command");
         }
     }
+
+    public File getCurrentFile() {
+        return currentFile;
+    }
+
+    public void setCurrentFile(File currentFile) {
+        this.currentFile = currentFile;
+    }
+
+    public File getBufferFile() {
+        return bufferFile;
+    }
+
+    public void setBufferFile(File bufferFile) {
+        this.bufferFile = bufferFile;
+    }
+
+    public boolean isCut() {
+        return cut;
+    }
+
+    public void setCut(boolean cut) {
+        this.cut = cut;
+    }
+
+    public static void main(String[] args){
+        FileManager fileManager = new FileManager();
+        try{
+            fileManager.init();
+        }
+        catch (IOException e){
+            System.out.println("Error!\n" + e.getMessage());
+        }
+    }
+
+
 
 }
