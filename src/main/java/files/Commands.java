@@ -31,10 +31,11 @@ public enum Commands {
             f.setCurrentFile(files[num]);
         }
     }),
-    OPEN_WITH_ABSOLUTE_PATH(Pattern.compile("^open ([\\wа-яА-Я/\\\\:]*)"), (s, m, f)->{
+    OPEN_WITH_ABSOLUTE_PATH(Pattern.compile("^open ([\\wа-яА-Я/\\\\:\\.]*)"), (s, m, f)->{
         if(m.matches()){
-            File file;
-            if((file = new File(m.group(1))).exists() && file.isDirectory()){
+            File file = new File(m.group(1));
+            file = new File(String.valueOf(f.getCurrentFile().toPath().resolve(file.toPath())));
+            if((file).exists() && file.isDirectory()){
                 f.setCurrentFile(file);
             }
             else {
@@ -108,7 +109,10 @@ public enum Commands {
     }),
     UP(Pattern.compile("^up"), (s, m, f) -> {
         if(m.matches()){
-            f.setCurrentFile(f.getCurrentFile().getParentFile());
+            File file = f.getCurrentFile().getParentFile();
+            if(file != null) {
+                f.setCurrentFile(f.getCurrentFile().getParentFile());
+            }
         }
     }),
     CUT(Pattern.compile("^cut ([1-9][0-9]*)"), (s, m, f) -> {
