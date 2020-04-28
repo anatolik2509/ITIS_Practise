@@ -64,3 +64,9 @@
 
 15.1,2)
     files/...
+
+16.2)
+    net/DownloadByURI
+
+16.2)
+    net/DivCounter
