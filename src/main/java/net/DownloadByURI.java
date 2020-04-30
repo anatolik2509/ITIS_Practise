@@ -1,5 +1,7 @@
 package net;
 
+import javax.activation.FileTypeMap;
+import javax.activation.MimetypesFileTypeMap;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +26,14 @@ public class DownloadByURI {
             int b = path.lastIndexOf('/');
             String name = path.substring(b == -1 ? 0:b);
             String type = connection.getContentType();
-            String ext = '.' + type.substring(type.indexOf('/', 0) + 1, type.indexOf(';', 0));
+            int e = type.indexOf(';', 0);
+            String ext;
+            if(e == -1){
+                ext = '.' + type.substring(type.indexOf('/', 0) + 1);
+            }
+            else {
+                ext = '.' + type.substring(type.indexOf('/', 0) + 1, e);
+            }
             if(name.lastIndexOf('.') == -1 || name.substring(name.lastIndexOf('.')).compareTo(ext) != 0){
                 name += ext;
             }
