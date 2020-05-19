@@ -10,10 +10,10 @@ import java.awt.event.KeyEvent;
 
 public class Piano {
     private static MidiChannel channel;
-    private static boolean[] keys = new boolean[26];
+    private static final boolean[] keys = new boolean[26];
     private static int instrument = 0;
     private static Synthesizer synthesizer;
-    public static void main(String[] args) throws MidiUnavailableException, InterruptedException {
+    public static void main(String[] args) throws MidiUnavailableException {
         KeyNoteMap.init();
         synthesizer = MidiSystem.getSynthesizer();
         synthesizer.open();
