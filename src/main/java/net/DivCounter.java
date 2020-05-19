@@ -23,7 +23,7 @@ public class DivCounter {
                 s.append(in + '\n');
             }
             System.out.println(s);
-            Matcher m = Pattern.compile("(<\\s*div.*>)|(<\\s*image.*>)").matcher(s);
+            Matcher m = Pattern.compile("(<\\s*div.*>)|(<\\s*img.*>)").matcher(s);
             int count = 0;
             while(m.find()){
                 count++;

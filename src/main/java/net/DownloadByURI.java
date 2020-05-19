@@ -1,11 +1,13 @@
 package net;
 
+import org.apache.tika.mime.MimeType;
+import org.apache.tika.mime.MimeTypeException;
+import org.apache.tika.mime.MimeTypes;
+import org.apache.tika.mime.MimeTypesFactory;
+
 import javax.activation.FileTypeMap;
 import javax.activation.MimetypesFileTypeMap;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -15,8 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DownloadByURI {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("input.txt"));
         URI uri = null;
         try {
             uri = new URI(sc.nextLine());
@@ -25,17 +27,16 @@ public class DownloadByURI {
             String path = uri.toURL().getPath();
             int b = path.lastIndexOf('/');
             String name = path.substring(b == -1 ? 0:b);
+            if(b == -1){
+                name = '/' + name;
+            }
             String type = connection.getContentType();
-            int e = type.indexOf(';', 0);
-            String ext;
-            if(e == -1){
-                ext = '.' + type.substring(type.indexOf('/', 0) + 1);
-            }
-            else {
-                ext = '.' + type.substring(type.indexOf('/', 0) + 1, e);
-            }
-            if(name.lastIndexOf('.') == -1 || name.substring(name.lastIndexOf('.')).compareTo(ext) != 0){
-                name += ext;
+            MimeTypes mimeTypes = MimeTypes.getDefaultMimeTypes();
+            MimeType type1 = mimeTypes.getRegisteredMimeType(type);
+            String ext = type1.getExtension();
+            b = name.lastIndexOf('.');
+            if(b == -1 && name.substring(b + 1).compareTo(ext) != 0){
+                name = name + ext;
             }
             FileOutputStream outputStream = new FileOutputStream("C:/test" + name);
             int in;
@@ -49,6 +50,8 @@ public class DownloadByURI {
             System.out.println(e.getMessage());
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        } catch (MimeTypeException e) {
+            e.printStackTrace();
         }
     }
 }

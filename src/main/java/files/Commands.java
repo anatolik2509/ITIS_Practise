@@ -1,6 +1,9 @@
 package files;
 
-import java.io.File;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -31,7 +34,7 @@ public enum Commands {
             f.setCurrentFile(files[num]);
         }
     }),
-    OPEN_WITH_ABSOLUTE_PATH(Pattern.compile("^open ([\\wа-яА-Я/\\\\:\\.]*)"), (s, m, f)->{
+    OPEN_WITH_PATH(Pattern.compile("^open ([\\wа-яА-Я/\\\\:\\.]*)"), (s, m, f)->{
         if(m.matches()){
             File file = new File(m.group(1));
             file = new File(String.valueOf(f.getCurrentFile().toPath().resolve(file.toPath())));
@@ -188,6 +191,33 @@ public enum Commands {
     }),
     EXIT(Pattern.compile("^exit"), (s, m, f) -> {
         f.exit();
+    }),
+    CAT(Pattern.compile("^cat ([\\wа-яА-Я/\\\\:\\.]*)"), (s, m, f) -> {
+            if(m.matches()){
+                File file = new File(m.group(1));
+                file = new File(String.valueOf(f.getCurrentFile().toPath().resolve(file.toPath())));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), Charset.forName("UTF-8")));
+                while(reader.ready()){
+                    System.out.println(reader.readLine());
+                }
+            }
+    }),
+    CAT_WITH_ENCODING(Pattern.compile("^cat ([\\wа-яА-Я/\\\\:\\.]*);([\\w\\d\\-]*)"), (s, m, f) -> {
+        if(m.matches()){
+            File file = new File(m.group(1));
+            file = new File(String.valueOf(f.getCurrentFile().toPath().resolve(file.toPath())));
+            BufferedReader reader;
+            try {
+                reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), Charset.forName(m.group(2))));
+                while(reader.ready()){
+                    System.out.println(reader.readLine());
+                }
+                System.out.println();
+            }
+            catch (UnsupportedCharsetException e){
+                System.out.println("No such charset");
+            }
+        }
     });
 
     private Pattern pattern;

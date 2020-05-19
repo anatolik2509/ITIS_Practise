@@ -21,7 +21,7 @@ public class TextToSound {
             }
             count++;
         }
-        t.add(new MidiEvent(new MetaMessage(), count * 5));
+        t.add(new MidiEvent(new MetaMessage(), count + 5));
         Sequencer sequencer = MidiSystem.getSequencer();
         sequencer.addMetaEventListener((m) -> {
             sequencer.stop();

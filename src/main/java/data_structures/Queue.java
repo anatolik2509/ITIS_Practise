@@ -49,11 +49,19 @@ public class Queue <T>{
         if(size - startPos + 1 < array.length / SHRINK_DIVIDER){
             shrinkArray();
         }
+        if(startPos > size){
+            startPos = size;
+        }
         return r;
     }
 
     public T peek(){
-        return array[0];
+        if(startPos >= size){
+            return null;
+        }
+        else {
+            return array[startPos];
+        }
     }
 
     public int size(){
@@ -68,6 +76,11 @@ public class Queue <T>{
         stack.add(4);
         stack.add(5);
         System.out.println(stack.peek());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.peek());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
         System.out.println(stack.pop());
         System.out.println(stack.pop());
         for(int i = 0; i < 1000; i++){
