@@ -29,7 +29,7 @@ public class SiteDownload {
         FileActions.deleteDirectory(f);
         File file = download(sc.nextLine(), OUTPUT);
         data_structures.Queue<String> queue = new data_structures.Queue<String>();
-        Pattern p = Pattern.compile("ref[\\s]*=[\\s]*\"([^\"]*)\"");
+        Pattern p = Pattern.compile("href[\\s]*=[\\s]*\"([^\"]*)\"");
         BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
         String content = "";
         while (r.ready()){

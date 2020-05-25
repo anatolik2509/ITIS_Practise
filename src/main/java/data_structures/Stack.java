@@ -41,6 +41,9 @@ public class Stack <T>{
     }
 
     public T pop(){
+        if(size == 0){
+            return null;
+        }
         size--;
         T r = array[size];
         array[size] = null;
